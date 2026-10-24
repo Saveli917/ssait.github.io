@@ -1,0 +1,1427 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#a855f7">
+<meta name="description" content="STRAX — Minecraft Java Edition. О клане, правила, новости и контакты.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="STRAX">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="STRAX — Minecraft Clan">
+<meta property="og:description" content="Клан STRAX для Minecraft Java Edition. О клане, правила, новости и контакты.">
+<meta property="og:url" content="/">
+<meta property="og:image" content="/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="STRAX — Minecraft Java Edition clan">
+<meta name="twitter:card" content="summary_large_image">
+<title>STRAX — Minecraft Clan</title>
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0OCA0OCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImZhdiIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmNWQwZmUiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIuNTUiIHN0b3AtY29sb3I9IiNhODU1ZjciLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNjdlOGY5Ii8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KICA8cmVjdCB4PSIyIiB5PSIyIiB3aWR0aD0iNDQiIGhlaWdodD0iNDQiIHJ4PSIxMyIgZmlsbD0iIzE0MGUyNCIgc3Ryb2tlPSJ1cmwoI2ZhdikiIHN0cm9rZS13aWR0aD0iMiIvPgogIDxwYXRoIGQ9Ik0xMSAzMyA5IDE1bDEwIDguNUwyNCAxMmw1IDExLjVMMzkgMTVsLTIgMTh6IiBmaWxsPSJ1cmwoI2ZhdikiLz4KICA8cmVjdCB4PSIxMSIgeT0iMzUiIHdpZHRoPSIyNiIgaGVpZ2h0PSIzLjUiIHJ4PSIxLjc1IiBmaWxsPSJ1cmwoI2ZhdikiLz4KPC9zdmc+Cg==" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;700;900&display=swap">
+<style>
+/* STRAX — неоновая тёмная тема. Без сборки и без внешних библиотек. */
+:root {
+  color-scheme: dark;
+  --bg: #07060d;
+  --line: rgba(168, 85, 247, .2);
+  --line-strong: rgba(168, 85, 247, .5);
+  --text: #f6f2ff;
+  --muted: #b3abcc;
+  --purple: #a855f7;
+  --violet: #7c3aed;
+  --pink: #e879f9;
+  --cyan: #5ef3ff;
+  --radius: 20px;
+  --ease: cubic-bezier(.2, .8, .2, 1);
+  --font-display: "Unbounded", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-body: "Manrope", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 90px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: var(--bg);
+  color: var(--text);
+  font: 400 16px/1.65 var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(900px 600px at 8% -8%, rgba(124, 58, 237, .3), transparent 60%),
+    radial-gradient(800px 560px at 96% 14%, rgba(14, 116, 144, .2), transparent 60%),
+    radial-gradient(900px 520px at 50% 120%, rgba(168, 85, 247, .16), transparent 60%);
+}
+::selection { background: rgba(168, 85, 247, .45); color: #fff; }
+a { color: inherit; text-decoration: none; }
+button, input, textarea { font: inherit; color: inherit; }
+img { max-width: 100%; display: block; }
+:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; border-radius: 8px; }
+[hidden] { display: none !important; }
+
+.wrap { width: min(1120px, calc(100% - 32px)); margin-inline: auto; }
+section { position: relative; padding: 96px 0; }
+.muted { color: var(--muted); }
+
+/* ---------- Прогресс прокрутки ---------- */
+.scroll-progress {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 60;
+  width: 100%;
+  height: 3px;
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  background: linear-gradient(90deg, var(--violet), var(--pink), var(--cyan));
+  box-shadow: 0 0 12px rgba(232, 121, 249, .7);
+}
+
+/* ---------- Шапка ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(7, 6, 13, .55);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border-bottom: 1px solid transparent;
+  transition: background .35s, border-color .35s, box-shadow .35s;
+}
+.site-header.scrolled {
+  background: rgba(7, 6, 13, .86);
+  border-bottom-color: var(--line);
+  box-shadow: 0 12px 40px -12px rgba(0, 0, 0, .6);
+}
+.nav { position: relative; height: 74px; display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.15rem;
+  letter-spacing: .16em;
+}
+.brand-mark { width: 36px; height: 36px; filter: drop-shadow(0 0 10px rgba(168, 85, 247, .55)); transition: transform .5s var(--ease); }
+.brand:hover .brand-mark { transform: rotate(-8deg) scale(1.06); }
+.links { display: flex; align-items: center; gap: 4px; }
+.links a {
+  position: relative;
+  padding: 8px 12px;
+  border-radius: 10px;
+  color: var(--muted);
+  font-size: .92rem;
+  font-weight: 600;
+  transition: color .25s, background .25s;
+}
+.links a:hover { color: var(--text); background: rgba(168, 85, 247, .12); }
+.links a.active { color: var(--text); }
+.links a.active::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 2px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--purple), var(--cyan));
+  box-shadow: 0 0 8px var(--purple);
+}
+.menu-btn {
+  display: none;
+  padding: 9px 14px;
+  border-radius: 11px;
+  border: 1px solid var(--line-strong);
+  background: rgba(255, 255, 255, .04);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* ---------- Кнопки ---------- */
+.btn {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 24px;
+  border-radius: 14px;
+  border: 1px solid rgba(216, 167, 255, .5);
+  background: linear-gradient(135deg, #a855f7 0%, #7c3aed 55%, #5b21b6 100%);
+  color: #fff;
+  font-weight: 800;
+  letter-spacing: .01em;
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow: 0 10px 30px -12px rgba(168, 85, 247, .85);
+  transition: transform .3s var(--ease), box-shadow .3s, filter .3s;
+}
+.btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, .3) 50%, transparent 65%);
+  transform: translateX(-120%);
+  transition: transform .75s var(--ease);
+  pointer-events: none;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 16px 40px -10px rgba(168, 85, 247, .9); filter: brightness(1.08); }
+.btn:hover::after { transform: translateX(120%); }
+.btn:active { transform: translateY(0) scale(.98); }
+.btn:disabled { opacity: .55; cursor: wait; transform: none; }
+.btn-ghost { background: rgba(255, 255, 255, .04); border-color: rgba(168, 85, 247, .35); box-shadow: none; }
+.btn-ghost:hover { background: rgba(168, 85, 247, .14); box-shadow: 0 0 28px rgba(168, 85, 247, .25); }
+.btn-sm { padding: 9px 16px; font-size: .9rem; border-radius: 12px; }
+
+/* ---------- Герой ---------- */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: min(100vh, 940px);
+  overflow: hidden;
+  isolation: isolate;
+  text-align: center;
+  padding: 120px 0 170px;
+}
+.hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -2; pointer-events: none; }
+.hero::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 6%;
+  width: min(900px, 140%);
+  height: 520px;
+  translate: -50% 0;
+  z-index: -1;
+  background: radial-gradient(closest-side, rgba(168, 85, 247, .38), transparent 70%);
+  filter: blur(10px);
+  animation: aura 9s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes aura { from { opacity: .55; scale: .96; } to { opacity: 1; scale: 1.04; } }
+
+/* «Синтвейв»-пол из неоновой сетки: нижний край сетки лежит на нижнем краю героя, поэтому виден целиком */
+.hero-grid {
+  position: absolute;
+  left: -40%;
+  right: -40%;
+  bottom: 0;
+  height: 60%;
+  z-index: -1;
+  pointer-events: none;
+  transform: perspective(760px) rotateX(62deg);
+  transform-origin: 50% 100%;
+  background-image:
+    linear-gradient(rgba(168, 85, 247, .5) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(94, 243, 255, .34) 1px, transparent 1px);
+  background-size: 70px 70px;
+  -webkit-mask-image: linear-gradient(to top, #000 10%, rgba(0, 0, 0, .35) 60%, transparent 100%);
+  mask-image: linear-gradient(to top, #000 10%, rgba(0, 0, 0, .35) 60%, transparent 100%);
+  animation: gridMove 5s linear infinite;
+}
+@keyframes gridMove { to { background-position: 0 70px; } }
+
+/* Плавающие пиксельные блоки */
+.pixel {
+  position: absolute;
+  z-index: 0;
+  width: var(--s, 22px);
+  height: var(--s, 22px);
+  border-radius: 5px;
+  background: linear-gradient(135deg, #f5d0fe, #a855f7 55%, #6d28d9);
+  box-shadow: 0 0 24px rgba(168, 85, 247, .55), inset 0 0 0 2px rgba(255, 255, 255, .14);
+  animation: bob var(--t, 7s) ease-in-out infinite;
+  pointer-events: none;
+}
+.p1 { --s: 28px; --t: 8s; left: 9%; top: 26%; }
+.p2 {
+  --s: 16px; --t: 6s; right: 11%; top: 20%;
+  background: linear-gradient(135deg, #e0fdff, #5ef3ff 50%, #2563eb);
+  box-shadow: 0 0 24px rgba(94, 243, 255, .45), inset 0 0 0 2px rgba(255, 255, 255, .14);
+  animation-delay: -2s;
+}
+.p3 { --s: 12px; --t: 5.5s; left: 20%; bottom: 24%; }
+.p4 { --s: 22px; --t: 9s; right: 19%; bottom: 30%; animation-delay: -4s; }
+@keyframes bob {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-18px) rotate(10deg); }
+}
+
+.hero-inner { position: relative; z-index: 1; animation: rise 1s var(--ease) both; }
+.hero-emblem { width: 94px; height: 94px; margin: 0 auto 18px; animation: float 5s ease-in-out infinite; }
+.hero-emblem svg { width: 100%; height: 100%; filter: drop-shadow(0 0 24px rgba(168, 85, 247, .75)); }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 15px;
+  border-radius: 999px;
+  border: 1px solid rgba(94, 243, 255, .32);
+  background: rgba(94, 243, 255, .06);
+  color: #b3f8ff;
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .18em;
+}
+.eyebrow::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 12px var(--cyan);
+  animation: blink 1.8s ease-in-out infinite;
+}
+@keyframes blink { 50% { opacity: .25; } }
+
+.hero-title {
+  margin: 24px 0 14px;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(3.6rem, 15vw, 9.5rem);
+  line-height: .95;
+  letter-spacing: .06em;
+}
+.hero-title span {
+  display: inline-block;
+  padding-right: .06em;
+  background: linear-gradient(100deg, #fff 0%, #f5d0fe 22%, #c084fc 40%, #67e8f9 56%, #fff 72%, #e9d5ff 100%);
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shine 7s linear infinite;
+  filter: drop-shadow(0 0 32px rgba(168, 85, 247, .5));
+}
+@keyframes shine { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
+
+.hero-lead { max-width: 620px; margin: 0 auto 32px; color: var(--muted); font-size: clamp(1rem, 2.2vw, 1.12rem); }
+.hero-lead strong { color: var(--text); font-weight: 800; }
+.actions { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+
+.scroll-cue {
+  position: absolute;
+  left: 50%;
+  bottom: 100px;
+  z-index: 1;
+  width: 26px;
+  height: 42px;
+  translate: -50% 0;
+  border: 1.5px solid rgba(232, 121, 249, .5);
+  border-radius: 14px;
+}
+.scroll-cue span {
+  position: absolute;
+  left: 50%;
+  top: 8px;
+  width: 4px;
+  height: 8px;
+  margin-left: -2px;
+  border-radius: 3px;
+  background: var(--pink);
+  animation: wheel 1.8s var(--ease) infinite;
+}
+@keyframes wheel {
+  0% { opacity: 0; transform: translateY(0); }
+  30% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(14px); }
+}
+
+/* ---------- Статистика и бегущая строка ---------- */
+.stats { position: relative; z-index: 2; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: -72px; }
+.stat { padding: 20px 16px; text-align: center; }
+.stat strong {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: .04em;
+  background: linear-gradient(90deg, #f5d0fe, #67e8f9);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.stat span { font-size: .85rem; color: var(--muted); }
+
+.ticker {
+  margin-top: 64px;
+  padding: 16px 0;
+  overflow: hidden;
+  border-block: 1px solid var(--line);
+  background: linear-gradient(90deg, rgba(124, 58, 237, .14), rgba(94, 243, 255, .06), rgba(124, 58, 237, .14));
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+}
+.ticker-track { display: flex; width: max-content; animation: ticker 38s linear infinite; }
+.ticker-group {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  padding-right: 26px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: .82rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: #d8b4fe;
+}
+.ticker-group i { font-style: normal; color: var(--cyan); text-shadow: 0 0 10px rgba(94, 243, 255, .8); }
+@keyframes ticker { to { transform: translateX(-50%); } }
+
+/* ---------- Общие блоки ---------- */
+.section-head { max-width: 700px; margin: 0 auto 48px; text-align: center; }
+.kicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  color: #c4b5fd;
+  font-size: .74rem;
+  font-weight: 800;
+  letter-spacing: .2em;
+}
+.kicker::before, .kicker::after {
+  content: "";
+  width: 34px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, transparent, var(--pink));
+}
+.kicker::after { transform: scaleX(-1); }
+.section-head h2 {
+  margin: 0 0 12px;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(1.9rem, 5vw, 2.9rem);
+  line-height: 1.15;
+}
+.section-head p { margin: 0; }
+
+.card, .stat, .rule, .step, .news-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: linear-gradient(155deg, rgba(33, 24, 58, .72), rgba(13, 11, 23, .82));
+  transition: transform .4s var(--ease), border-color .4s, box-shadow .4s;
+}
+.card:hover, .stat:hover, .rule:hover, .step:hover, .news-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--line-strong);
+  box-shadow: 0 22px 50px -20px rgba(168, 85, 247, .55);
+}
+
+/* Подсветка за курсором (координаты задаёт app.js) */
+.spot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(380px circle at var(--mx, 50%) var(--my, 50%), rgba(168, 85, 247, .2), transparent 65%);
+  opacity: 0;
+  transition: opacity .4s;
+}
+.spot:hover::after { opacity: 1; }
+.spot > * { position: relative; z-index: 1; }
+
+/* Появление при прокрутке (класс reveal ставит app.js) */
+.reveal { opacity: 0; }
+.reveal.visible { animation: rise .9s var(--ease) var(--d, 0ms) both; }
+@keyframes rise {
+  from { opacity: 0; translate: 0 26px; filter: blur(6px); }
+  to { opacity: 1; translate: 0 0; filter: none; }
+}
+
+/* ---------- О клане ---------- */
+.about-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 18px; }
+.card { padding: 30px; }
+.card h3 { margin: 0 0 12px; font-family: var(--font-display); font-weight: 700; font-size: 1.2rem; }
+.values { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 24px; }
+.value {
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background: rgba(7, 6, 13, .55);
+  transition: border-color .3s, transform .3s var(--ease);
+}
+.value:hover { border-color: var(--line-strong); transform: translateY(-3px); }
+.value-ico {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  margin-bottom: 12px;
+  border-radius: 13px;
+  font-size: 1.2rem;
+  background: linear-gradient(135deg, rgba(168, 85, 247, .4), rgba(94, 243, 255, .14));
+}
+.value b { display: block; margin-bottom: 2px; }
+.value p { margin: 0; font-size: .9rem; color: var(--muted); }
+
+.contact {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 12px;
+  padding: 14px;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background: rgba(7, 6, 13, .55);
+}
+.contact-ico {
+  flex: 0 0 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  font-size: 1.25rem;
+  background: rgba(168, 85, 247, .16);
+}
+.contact-body { flex: 1; min-width: 0; }
+.contact b { display: block; }
+.contact small { display: block; font-size: .88rem; color: var(--muted); overflow-wrap: anywhere; }
+.contact small a { color: #d8b4fe; text-decoration: underline; text-underline-offset: 3px; }
+.copy-btn {
+  flex: 0 0 auto;
+  padding: 8px 13px;
+  border-radius: 11px;
+  border: 1px solid var(--line-strong);
+  background: rgba(168, 85, 247, .12);
+  font-size: .82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .25s, transform .25s;
+}
+.copy-btn:hover { background: rgba(168, 85, 247, .28); transform: translateY(-1px); }
+
+/* ---------- Новости ---------- */
+.news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 16px; }
+.news-card { padding: 26px 24px 24px 28px; }
+.news-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 24px;
+  bottom: 24px;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: linear-gradient(var(--pink), var(--purple));
+  box-shadow: 0 0 14px rgba(232, 121, 249, .6);
+}
+.news-card time {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 3px 11px;
+  border-radius: 999px;
+  border: 1px solid rgba(232, 121, 249, .32);
+  background: rgba(232, 121, 249, .1);
+  color: #f5d0fe;
+  font-size: .74rem;
+  font-weight: 800;
+  letter-spacing: .06em;
+}
+.news-card h3 { margin: 0 0 8px; font-family: var(--font-display); font-weight: 700; font-size: 1.06rem; overflow-wrap: anywhere; }
+.news-card p { margin: 0; font-size: .94rem; color: var(--muted); overflow-wrap: anywhere; }
+
+/* ---------- Правила ---------- */
+.rules { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none; }
+.rule { display: flex; align-items: flex-start; gap: 14px; padding: 18px; }
+.num {
+  flex: 0 0 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  background: linear-gradient(135deg, var(--purple), var(--violet));
+  box-shadow: 0 0 20px rgba(168, 85, 247, .4);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: .78rem;
+  color: #fff;
+}
+.rule p { margin: 0; font-size: .95rem; line-height: 1.55; }
+
+/* ---------- Как вступить ---------- */
+.steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 0; padding: 0; list-style: none; }
+.step { padding: 34px 24px 28px; text-align: center; }
+.step-dot {
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  background: #0d0b18;
+  border: 2px solid var(--purple);
+  box-shadow: 0 0 0 7px rgba(168, 85, 247, .1), 0 0 28px rgba(168, 85, 247, .5);
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: .9rem;
+  color: #f5d0fe;
+}
+.step h3 { margin: 0 0 8px; font-family: var(--font-display); font-weight: 700; font-size: 1.02rem; }
+.step p { margin: 0; font-size: .92rem; color: var(--muted); }
+
+/* ---------- Призыв в конце ---------- */
+.cta-section { padding-top: 20px; }
+.cta {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 36px;
+  border-radius: 26px;
+  border: 1px solid rgba(168, 85, 247, .42);
+  background:
+    radial-gradient(560px 220px at 100% 0%, rgba(232, 121, 249, .32), transparent 60%),
+    radial-gradient(520px 220px at 0% 100%, rgba(94, 243, 255, .16), transparent 60%),
+    linear-gradient(135deg, #1b1032, #0c0a18);
+}
+.cta h2 { margin: 0 0 6px; font-family: var(--font-display); font-weight: 900; font-size: clamp(1.3rem, 3.4vw, 2rem); line-height: 1.2; }
+.cta p { margin: 0; color: var(--muted); }
+
+/* ---------- Подвал ---------- */
+.site-footer { margin-top: 56px; padding: 32px 0 40px; border-top: 1px solid var(--line); color: var(--muted); font-size: .88rem; }
+.foot { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
+.foot-brand strong { display: block; font-family: var(--font-display); font-size: 1rem; letter-spacing: .14em; color: #fff; }
+
+/* ---------- Музыка ---------- */
+.music-control {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 35;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px 10px 13px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: rgba(19, 13, 32, .86);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--text);
+  font-size: .86rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 0 26px rgba(168, 85, 247, .25);
+  transition: transform .3s var(--ease), box-shadow .3s, background .3s;
+}
+.music-control:hover { transform: translateY(-2px); box-shadow: 0 0 34px rgba(168, 85, 247, .45); }
+.music-control[aria-pressed="true"] { background: linear-gradient(135deg, rgba(139, 34, 204, .9), rgba(59, 23, 104, .9)); }
+.eq { display: inline-flex; align-items: flex-end; gap: 3px; width: 18px; height: 16px; }
+.eq i {
+  display: block;
+  width: 3px;
+  height: 100%;
+  border-radius: 2px;
+  background: var(--cyan);
+  transform-origin: 50% 100%;
+  transform: scaleY(.35);
+}
+.eq i:nth-child(1) { --d: -.2s; }
+.eq i:nth-child(2) { --d: -.7s; }
+.eq i:nth-child(3) { --d: -.4s; }
+.eq i:nth-child(4) { --d: -.9s; }
+.music-control[aria-pressed="true"] .eq i { animation: eq .9s var(--d, 0s) ease-in-out infinite alternate; }
+@keyframes eq { from { transform: scaleY(.25); } to { transform: scaleY(1); } }
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 78px;
+  z-index: 70;
+  width: max-content;
+  max-width: min(92vw, 440px);
+  padding: 12px 18px;
+  border-radius: 14px;
+  border: 1px solid var(--line-strong);
+  background: rgba(19, 13, 32, .96);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, .5);
+  font-size: .92rem;
+  text-align: center;
+  opacity: 0;
+  translate: -50% 14px;
+  pointer-events: none;
+  transition: opacity .3s, translate .35s var(--ease);
+}
+.toast.show { opacity: 1; translate: -50% 0; }
+.toast.ok { border-color: rgba(74, 222, 128, .5); }
+.toast.err { border-color: rgba(248, 113, 113, .6); }
+
+/* ---------- Админ-панель ---------- */
+.admin-fab {
+  position: fixed;
+  left: 18px;
+  bottom: 18px;
+  z-index: 35;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 15px;
+  border-radius: 999px;
+  border: 1px solid #3e2b57;
+  background: rgba(17, 16, 26, .86);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #cdb8ec;
+  font-size: .86rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: color .25s, border-color .25s, transform .3s var(--ease);
+}
+.admin-fab:hover { color: #fff; border-color: var(--purple); transform: translateY(-2px); }
+
+.admin-panel {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background: rgba(5, 4, 11, .72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .3s, visibility .3s;
+}
+.admin-panel.open { opacity: 1; visibility: visible; }
+.admin-box {
+  width: min(780px, 100%);
+  max-height: calc(100vh - 36px);
+  overflow: auto;
+  padding: 26px;
+  border-radius: 24px;
+  border: 1px solid rgba(168, 85, 247, .42);
+  background: linear-gradient(165deg, #161029, #0b0917);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, .65), 0 0 60px rgba(168, 85, 247, .18);
+  transform: translateY(16px) scale(.98);
+  transition: transform .4s var(--ease);
+}
+.admin-panel.open .admin-box { transform: none; }
+.admin-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.admin-head h2 { margin: 0; font-family: var(--font-display); font-size: 1.2rem; }
+.admin-note { margin: 10px 0 18px; font-size: .88rem; color: var(--muted); }
+.admin-note code { padding: 1px 7px; border-radius: 7px; background: rgba(168, 85, 247, .16); color: #f0e0ff; }
+.admin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.field { display: flex; flex-direction: column; gap: 7px; }
+.field.full { grid-column: 1 / -1; }
+label { font-size: .88rem; font-weight: 700; }
+input, textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid #3a2f52;
+  background: #0a0912;
+  color: var(--text);
+  outline: none;
+  transition: border-color .25s, box-shadow .25s;
+}
+input:focus, textarea:focus { border-color: #b56aff; box-shadow: 0 0 0 3px rgba(168, 85, 247, .2); }
+textarea { min-height: 110px; resize: vertical; }
+.admin-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.admin-status {
+  display: none;
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: #1a1426;
+  font-size: .92rem;
+}
+.admin-status.show { display: block; }
+.admin-status.ok { border-color: rgba(74, 222, 128, .5); }
+.admin-status.err { border-color: rgba(248, 113, 113, .6); }
+
+/* ---------- Адаптив ---------- */
+@media (max-width: 980px) {
+  .about-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 860px) {
+  .menu-btn { display: inline-flex; align-items: center; }
+  .nav > .btn-sm { display: none; }
+  .links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 6px 16px 16px;
+    background: #0a0912;
+    border-bottom: 1px solid var(--line);
+    box-shadow: 0 24px 40px -20px rgba(0, 0, 0, .8);
+  }
+  .links.open { display: flex; animation: menuIn .32s var(--ease) both; }
+  @keyframes menuIn { from { opacity: 0; translate: 0 -10px; } to { opacity: 1; translate: 0 0; } }
+  .links a { padding: 13px 6px; border-radius: 0; border-bottom: 1px solid rgba(255, 255, 255, .06); }
+  .links a.active::after { display: none; }
+  .rules { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 700px) {
+  .hero { padding: 96px 0 150px; }
+  .pixel.p2, .pixel.p4 { display: none; }
+  .stats { grid-template-columns: 1fr; gap: 10px; margin-top: -44px; }
+  .stat { display: flex; align-items: center; justify-content: space-between; text-align: left; }
+  .stat strong { font-size: 1.05rem; }
+  .values, .steps, .admin-grid { grid-template-columns: 1fr; }
+  section { padding: 72px 0; }
+  .card { padding: 24px; }
+  .cta { padding: 26px; }
+  .music-control { right: 12px; bottom: 12px; padding: 9px 13px 9px 11px; font-size: .8rem; }
+  .admin-fab { left: 12px; bottom: 12px; padding: 9px 12px; font-size: .8rem; }
+  .toast { bottom: 70px; }
+  .scroll-cue { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; }
+  .hero-canvas, .ticker { display: none; }
+}
+
+</style>
+</head>
+<body>
+<div class="scroll-progress" id="progress" aria-hidden="true"></div>
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="#home" aria-label="STRAX — наверх">
+      <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true">
+        <defs>
+          <linearGradient id="gBrand" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#f5d0fe"/><stop offset=".55" stop-color="#a855f7"/><stop offset="1" stop-color="#67e8f9"/>
+          </linearGradient>
+        </defs>
+        <rect x="2" y="2" width="44" height="44" rx="13" fill="#140e24" stroke="url(#gBrand)" stroke-width="2"/>
+        <path d="M11 33 9 15l10 8.5L24 12l5 11.5L39 15l-2 18z" fill="url(#gBrand)"/>
+        <rect x="11" y="35" width="26" height="3.5" rx="1.75" fill="url(#gBrand)"/>
+      </svg>
+      <span>STRAX</span>
+    </a>
+    <button class="menu-btn" id="menu" type="button" aria-expanded="false" aria-controls="links">☰ Меню</button>
+    <nav class="links" id="links" aria-label="Разделы сайта">
+      <a href="#home">Главная</a>
+      <a href="#about">О клане</a>
+      <a href="#rules">Правила</a>
+            <a href="#news">Новости</a>
+      <a href="#join">Как вступить</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <a class="btn btn-sm" href="#contacts">Связаться</a>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="home">
+  <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
+  <div class="hero-grid" aria-hidden="true"></div>
+  <span class="pixel p1" aria-hidden="true"></span>
+  <span class="pixel p2" aria-hidden="true"></span>
+  <span class="pixel p3" aria-hidden="true"></span>
+  <span class="pixel p4" aria-hidden="true"></span>
+
+  <div class="wrap hero-inner">
+    <div class="hero-emblem" aria-hidden="true">
+      <svg viewBox="0 0 48 48">
+        <defs>
+          <linearGradient id="gHero" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#f5d0fe"/><stop offset=".55" stop-color="#a855f7"/><stop offset="1" stop-color="#67e8f9"/>
+          </linearGradient>
+        </defs>
+        <rect x="2" y="2" width="44" height="44" rx="13" fill="#140e24" stroke="url(#gHero)" stroke-width="1.5"/>
+        <path d="M11 33 9 15l10 8.5L24 12l5 11.5L39 15l-2 18z" fill="url(#gHero)"/>
+        <rect x="11" y="35" width="26" height="3.5" rx="1.75" fill="url(#gHero)"/>
+      </svg>
+    </div>
+    <span class="eyebrow">MINECRAFT JAVA EDITION · CLAN</span>
+    <h1 class="hero-title"><span>STRAX</span></h1>
+    <p class="hero-lead"><strong>Больше, чем просто клан.</strong><br>Развивайся, играй в команде и добивайся побед вместе с STRAX.</p>
+    <div class="actions">
+      <a class="btn" href="#contacts">Связаться с нами <span aria-hidden="true">↗</span></a>
+      <a class="btn btn-ghost" href="#rules">Читать правила <span aria-hidden="true">↓</span></a>
+    </div>
+  </div>
+
+  <a class="scroll-cue" href="#about" aria-label="Прокрутить вниз"><span></span></a>
+</section>
+
+<div class="wrap stats" id="stats">
+  <div class="stat"><strong>JAVA</strong><span>Версия Minecraft</span></div>
+  <div class="stat"><strong>STRAX</strong><span>Единая команда</span></div>
+  <div class="stat"><strong>FAIR PLAY</strong><span>Честная игра</span></div>
+</div>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <div class="ticker-group"><span>Fair play</span><i>✦</i><span>Единая команда</span><i>✦</i><span>Java edition</span><i>✦</i><span>Уважение</span><i>✦</i><span>Развитие</span><i>✦</i><span>Победы</span><i>✦</i></div>
+    <div class="ticker-group"><span>Fair play</span><i>✦</i><span>Единая команда</span><i>✦</i><span>Java edition</span><i>✦</i><span>Уважение</span><i>✦</i><span>Развитие</span><i>✦</i><span>Победы</span><i>✦</i></div>
+  </div>
+</div>
+
+<section id="about">
+  <div class="wrap">
+    <header class="section-head">
+      <div class="kicker">НАША ИДЕЯ</div>
+      <h2>О клане STRAX</h2>
+      <p class="muted">Клан для игроков, которые ценят дружную команду, честную игру и развитие.</p>
+    </header>
+    <div class="about-grid">
+      <article class="card spot">
+        <h3>Вместе мы сильнее</h3>
+        <p class="muted">STRAX — сообщество Minecraft Java Edition. Мы собираемся ради совместных игр, новых достижений и приятного общения. Важны не только навыки, но и отношение к команде.</p>
+        <div class="values">
+          <div class="value"><span class="value-ico" aria-hidden="true">🤝</span><b>Уважение</b><p>Без травли и токсичности.</p></div>
+          <div class="value"><span class="value-ico" aria-hidden="true">⚔️</span><b>Команда</b><p>Поддерживаем друг друга.</p></div>
+          <div class="value"><span class="value-ico" aria-hidden="true">📈</span><b>Развитие</b><p>Учимся и растём вместе.</p></div>
+          <div class="value"><span class="value-ico" aria-hidden="true">🛡️</span><b>Честность</b><p>Играем без читов.</p></div>
+        </div>
+      </article>
+
+      <aside class="card spot contacts" id="contacts">
+        <h3>Контакты</h3>
+        <p class="muted">Заходи в наш Discord, знакомься с командой и задавай вопросы.</p>
+        <div class="contact">
+          <span class="contact-ico" aria-hidden="true">🎮</span>
+          <div class="contact-body"><b>Discord</b><small id="discordText"><a href="https://discord.gg/ffDGttvy4" target="_blank" rel="noopener noreferrer">Открыть приглашение ↗</a></small></div>
+        </div>
+        <div class="contact">
+          <span class="contact-ico" aria-hidden="true">⛏️</span>
+          <div class="contact-body"><b>Сервер Minecraft</b><small id="serverText">Java Edition · IP пока не указан.</small></div>
+          <button class="copy-btn" id="copyIp" type="button" hidden>Копировать</button>
+        </div>
+        <div class="contact">
+          <span class="contact-ico" aria-hidden="true">👥</span>
+          <div class="contact-body"><b>Вступление в клан</b><small>Напиши в Discord: @salari_fox</small></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="news">
+  <div class="wrap">
+    <header class="section-head">
+      <div class="kicker">СВЕЖИЕ СОБЫТИЯ</div>
+      <h2>Новости клана</h2>
+      <p class="muted">Анонсы, результаты и важные сообщения.</p>
+    </header>
+    <div class="news-grid" id="newsGrid">
+      <article class="news-card spot">
+        <time>STRAX</time>
+        <h3>Добро пожаловать!</h3>
+        <p>Следи за новостями клана — здесь появятся обновления.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="rules">
+  <div class="wrap">
+    <header class="section-head">
+      <div class="kicker">ВАЖНО ДЛЯ ВСЕХ</div>
+      <h2>Правила клана</h2>
+      <p class="muted">Нарушение правил может привести к предупреждению или исключению из клана.</p>
+    </header>
+    <ol class="rules">
+      <li class="rule spot"><span class="num">01</span><p>Уважай всех участников. Оскорбления, травля и токсичность запрещены.</p></li>
+      <li class="rule spot"><span class="num">02</span><p>Не используй читы и сторонние программы для нечестного преимущества.</p></li>
+      <li class="rule spot"><span class="num">03</span><p>Соблюдай правила Minecraft-сервера, на котором играет клан.</p></li>
+      <li class="rule spot"><span class="num">04</span><p>Не выдавай себя за представителя администрации и не злоупотребляй доверием.</p></li>
+      <li class="rule spot"><span class="num">05</span><p>Не кради ресурсы и не порти постройки соклановцев без разрешения.</p></li>
+      <li class="rule spot"><span class="num">06</span><p>Помогай команде и уважай договорённости о совместной игре.</p></li>
+      <li class="rule spot"><span class="num">07</span><p>Не спамь и не засоряй чаты сообщениями.</p></li>
+      <li class="rule spot"><span class="num">08</span><p>Не публикуй личные данные других игроков без их согласия.</p></li>
+      <li class="rule spot"><span class="num">09</span><p>Не передавай свой аккаунт другим людям.</p></li>
+      <li class="rule spot"><span class="num">10</span><p>Конфликты решай спокойно; при необходимости обратись к администрации клана.</p></li>
+      <li class="rule spot"><span class="num">11</span><p>Если долго не сможешь играть, по возможности предупреди команду.</p></li>
+      <li class="rule spot"><span class="num">12</span><p>Соблюдай правила и помни: репутация клана зависит от каждого.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section id="join">
+  <div class="wrap">
+    <header class="section-head">
+      <div class="kicker">ТВОЙ ПУТЬ В STRAX</div>
+      <h2>Как вступить</h2>
+    </header>
+    <ol class="steps">
+      <li class="step spot"><span class="step-dot">01</span><h3>Изучи правила</h3><p>Убедись, что согласен с правилами и принципами клана.</p></li>
+      <li class="step spot"><span class="step-dot">02</span><h3>Свяжись с администрацией</h3><p>Напиши @salari_fox в Discord.</p></li>
+      <li class="step spot"><span class="step-dot">03</span><h3>Познакомься с командой</h3><p>Обсуди вступление и узнай о ближайших совместных играх.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="wrap">
+    <div class="cta">
+      <div>
+        <h2>Готов стать частью STRAX?</h2>
+        <p>Напиши администрации в Discord — ответим на все вопросы.</p>
+      </div>
+      <a class="btn" href="#contacts">Связаться ↗</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap foot">
+    <div class="foot-brand"><strong>♛ STRAX</strong><span>Играй · Развивайся · Побеждай</span></div>
+    <div>Фан-сайт Minecraft-клана STRAX · © <span id="year"></span></div>
+  </div>
+</footer>
+
+<audio id="bgMusic" loop preload="none"><source src="/music.mp3" type="audio/mpeg"></audio>
+<button class="music-control" id="musicToggle" type="button" aria-pressed="false" title="Включить или выключить музыку">
+  <span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+  <span id="musicLabel">Музыка: выкл.</span>
+</button>
+<button class="admin-fab" id="adminOpen" type="button">⚙ Админ</button>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<div class="admin-panel" id="adminPanel" role="dialog" aria-modal="true" aria-labelledby="adminTitle">
+  <div class="admin-box">
+    <div class="admin-head">
+      <h2 id="adminTitle">⚙ Панель STRAX</h2>
+      <button class="btn btn-ghost btn-sm" id="adminClose" type="button">Закрыть ✕</button>
+    </div>
+    <p class="admin-note">Настройки сохраняются на сервере. Пароль задаётся в файле <code>.env</code> (переменная ADMIN_PASSWORD).</p>
+
+    <form id="loginForm">
+      <div class="field">
+        <label for="adminPassword">Пароль администратора</label>
+        <input id="adminPassword" type="password" autocomplete="current-password" required>
+      </div>
+      <div class="admin-actions"><button class="btn" type="submit">Войти</button></div>
+    </form>
+
+    <div id="adminEditor" hidden>
+      <div class="admin-grid">
+        <div class="field"><label for="discordUrl">Discord-ссылка</label><input id="discordUrl" type="url" placeholder="https://discord.gg/..."></div>
+        <div class="field"><label for="serverIp">IP Minecraft</label><input id="serverIp" placeholder="play.example.net"></div>
+        <div class="field full"><label for="newsInput">Новости (по одной на строку: заголовок | текст | дата)</label><textarea id="newsInput" placeholder="Старт сезона | Начинаем новый сезон! | 2026-10-22"></textarea></div>
+      </div>
+      <div class="admin-actions">
+        <button class="btn" id="saveContent" type="button">Сохранить изменения</button>
+        <button class="btn btn-ghost" id="logoutAdmin" type="button">Выйти</button>
+      </div>
+    </div>
+
+    <div class="admin-status" id="adminStatus" role="status"></div>
+  </div>
+</div>
+
+<script>
+/* STRAX — интерактив: анимации, состав и новости, админ-панель. Без зависимостей. */
+(() => {
+  'use strict';
+
+  const $ = (id) => document.getElementById(id);
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  /* ---------- Тост-уведомления ---------- */
+  const toastEl = $('toast');
+  let toastTimer = 0;
+  function toast(text, type = 'ok') {
+    toastEl.textContent = text;
+    toastEl.className = `toast show ${type}`;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toastEl.classList.remove('show'), 3800);
+  }
+
+  /* ---------- Шапка: тень при прокрутке, полоска прогресса ---------- */
+  const header = document.querySelector('.site-header');
+  const progress = $('progress');
+  function onScroll() {
+    header.classList.toggle('scrolled', window.scrollY > 12);
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const ratio = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
+    progress.style.transform = `scaleX(${ratio})`;
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  onScroll();
+
+  /* ---------- Мобильное меню ---------- */
+  const menu = $('menu');
+  const links = $('links');
+  function setMenu(open) {
+    links.classList.toggle('open', open);
+    menu.setAttribute('aria-expanded', String(open));
+    menu.textContent = open ? '✕ Закрыть' : '☰ Меню';
+  }
+  menu.addEventListener('click', () => setMenu(!links.classList.contains('open')));
+  links.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setMenu(false)));
+
+  /* ---------- Подсветка текущего раздела в меню ---------- */
+  const navItems = new Map();
+  links.querySelectorAll('a[href^="#"]').forEach((a) => navItems.set(a.getAttribute('href').slice(1), a));
+  if ('IntersectionObserver' in window) {
+    const spy = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        links.querySelectorAll('a').forEach((a) => a.classList.remove('active'));
+        navItems.get(entry.target.id)?.classList.add('active');
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    navItems.forEach((_, id) => {
+      const target = document.getElementById(id);
+      if (target) spy.observe(target);
+    });
+  }
+
+  $('year').textContent = new Date().getFullYear();
+
+  /* ---------- Появление элементов при прокрутке ---------- */
+  const revealIO = ('IntersectionObserver' in window && !reduceMotion)
+    ? new IntersectionObserver((entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' })
+    : null;
+
+  function reveal(el, delay = 0) {
+    if (!revealIO) return;
+    el.classList.add('reveal');
+    el.style.setProperty('--d', `${delay}ms`);
+    revealIO.observe(el);
+  }
+  function revealGroup(nodes) {
+    Array.from(nodes).forEach((el, i) => reveal(el, Math.min(i, 6) * 90));
+  }
+  document.querySelectorAll('.section-head, .cta').forEach((el) => reveal(el));
+  revealGroup(document.querySelectorAll(
+    '.about-grid > *, .stats > .stat, .rules > .rule, .steps > .step, #newsGrid > *'
+  ));
+
+  /* ---------- Подсветка карточек за курсором ---------- */
+  if (finePointer) {
+    document.addEventListener('pointermove', (e) => {
+      const card = e.target instanceof Element ? e.target.closest('.spot') : null;
+      if (!card) return;
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', `${e.clientX - r.left}px`);
+      card.style.setProperty('--my', `${e.clientY - r.top}px`);
+    }, { passive: true });
+  }
+
+  /* ---------- Фоновая анимация в hero: звёзды и соединительные линии ---------- */
+  const canvas = $('heroCanvas');
+  if (canvas && !reduceMotion && canvas.getContext) {
+    const ctx = canvas.getContext('2d');
+    const hero = canvas.parentElement;
+    const COLORS = ['168,85,247', '232,121,249', '94,243,255'];
+    const LINK = 150;
+    let w = 0;
+    let h = 0;
+    let particles = [];
+    let raf = 0;
+    let inView = true;
+    let resizeTimer = 0;
+
+    function size() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const r = hero.getBoundingClientRect();
+      w = r.width;
+      h = r.height;
+      canvas.width = Math.round(w * dpr);
+      canvas.height = Math.round(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const count = Math.min(95, Math.floor((w * h) / 15000));
+      particles = Array.from({ length: count }, () => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        r: Math.random() * 1.5 + 0.5,
+        c: COLORS[Math.floor(Math.random() * COLORS.length)],
+      }));
+    }
+
+    function frame() {
+      ctx.clearRect(0, 0, w, h);
+      for (const p of particles) {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < -10) p.x = w + 10; else if (p.x > w + 10) p.x = -10;
+        if (p.y < -10) p.y = h + 10; else if (p.y > h + 10) p.y = -10;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${p.c},0.9)`;
+        ctx.fill();
+      }
+      ctx.lineWidth = 0.6;
+      for (let i = 0; i < particles.length; i++) {
+        const a = particles[i];
+        for (let j = i + 1; j < particles.length; j++) {
+          const b = particles[j];
+          const dx = a.x - b.x;
+          const dy = a.y - b.y;
+          const d = dx * dx + dy * dy;
+          if (d < LINK * LINK) {
+            ctx.strokeStyle = `rgba(168,85,247,${(1 - d / (LINK * LINK)) * 0.35})`;
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          }
+        }
+      }
+      raf = requestAnimationFrame(frame);
+    }
+
+    // Анимация работает только когда hero виден и вкладка активна.
+    function syncAnimation() {
+      const run = inView && !document.hidden;
+      if (run && !raf) raf = requestAnimationFrame(frame);
+      if (!run && raf) { cancelAnimationFrame(raf); raf = 0; }
+    }
+    new IntersectionObserver(([entry]) => { inView = entry.isIntersecting; syncAnimation(); }).observe(canvas);
+    document.addEventListener('visibilitychange', syncAnimation);
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(size, 150);
+    });
+    size();
+    syncAnimation();
+  }
+
+  /* ---------- Фоновая музыка ---------- */
+  const music = $('bgMusic');
+  const musicBtn = $('musicToggle');
+  const musicLabel = $('musicLabel');
+  function setMusicState(on) {
+    musicBtn.setAttribute('aria-pressed', String(on));
+    musicLabel.textContent = on ? 'Музыка: вкл.' : 'Музыка: выкл.';
+  }
+  // play() на отсутствующем файле не отклоняется, а зависает, поэтому сначала проверяем наличие файла.
+  const MUSIC_URL = '/music.mp3';
+  musicBtn.addEventListener('click', async () => {
+    if (!music.paused) {
+      music.pause();
+      setMusicState(false);
+      return;
+    }
+    const probe = await fetch(MUSIC_URL, { method: 'HEAD' }).catch(() => null);
+    if (!probe || !probe.ok) {
+      toast('Добавь файл public/music.mp3, чтобы включить музыку.', 'err');
+      return;
+    }
+    try {
+      await music.play();
+      setMusicState(true);
+    } catch {
+      toast('Не удалось запустить музыку. Проверь файл public/music.mp3.', 'err');
+    }
+  });
+
+  function newsCard(n) {
+    const el = document.createElement('article');
+    el.className = 'news-card spot';
+    const time = document.createElement('time');
+    time.textContent = n.date || 'STRAX';
+    const h = document.createElement('h3');
+    h.textContent = n.title;
+    const p = document.createElement('p');
+    p.textContent = n.text || '';
+    el.append(time, h, p);
+    return el;
+  }
+
+  function placeholder(title, text) {
+    const el = document.createElement('article');
+    el.className = 'news-card spot';
+    const time = document.createElement('time');
+    time.textContent = 'STRAX';
+    const h = document.createElement('h3');
+    h.textContent = title;
+    const p = document.createElement('p');
+    p.textContent = text;
+    el.append(time, h, p);
+    return el;
+  }
+
+  /* ---------- Вывод данных с сервера ---------- */
+  function renderContent(c) {
+    const news = c.news || [];
+    const ng = $('newsGrid');
+    ng.replaceChildren(...(news.length
+      ? news.map(newsCard)
+      : [placeholder('Скоро новости', 'Здесь появятся обновления клана.')]));
+    if (revealIO) revealGroup(ng.children);
+
+    const discordEl = $('discordText');
+    if (c.discordUrl) {
+      const a = document.createElement('a');
+      a.href = c.discordUrl;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.textContent = 'Открыть приглашение ↗';
+      discordEl.replaceChildren(a);
+    } else {
+      discordEl.textContent = 'Ссылка-приглашение пока не добавлена.';
+    }
+    $('serverText').textContent = c.serverIp || 'Java Edition · IP пока не указан.';
+    $('copyIp').hidden = !c.serverIp;
+  }
+
+  async function api(url, opts = {}) {
+    const res = await fetch(url, { ...opts, headers: { 'Content-Type': 'application/json', ...(opts.headers || {}) } });
+    const data = await res.json().catch(() => ({ error: 'Некорректный ответ сервера' }));
+    if (!res.ok) throw new Error(data.error || 'Ошибка запроса');
+    return data;
+  }
+
+  let currentContent = { discordUrl: '', serverIp: '', news: [] };
+  async function loadContent() {
+    try {
+      currentContent = await api('/api/content');
+      renderContent(currentContent);
+    } catch (err) {
+      console.warn('Не удалось загрузить контент', err);
+    }
+  }
+  loadContent();
+
+  $('copyIp').addEventListener('click', async () => {
+    const ip = currentContent.serverIp;
+    if (!ip) return;
+    try {
+      await navigator.clipboard.writeText(ip);
+      toast(`IP ${ip} скопирован`);
+    } catch {
+      toast('Не удалось скопировать. Выдели IP вручную.', 'err');
+    }
+  });
+
+  /* ---------- Админ-панель ---------- */
+  const adminPanel = $('adminPanel');
+  const adminStatus = $('adminStatus');
+  const loginForm = $('loginForm');
+  const editor = $('adminEditor');
+  const passwordInput = $('adminPassword');
+
+  function showAdminStatus(text, type = '') {
+    adminStatus.textContent = text;
+    adminStatus.className = `admin-status show ${type}`.trim();
+  }
+  function hideAdminStatus() {
+    adminStatus.className = 'admin-status';
+  }
+  let openerEl = null;
+  function openAdmin() {
+    openerEl = document.activeElement;
+    adminPanel.classList.add('open');
+    hideAdminStatus();
+    setTimeout(() => (loginForm.hidden ? $('discordUrl') : passwordInput).focus({ preventScroll: true }), 120);
+  }
+  function closeAdmin() {
+    adminPanel.classList.remove('open');
+    if (openerEl && typeof openerEl.focus === 'function') openerEl.focus({ preventScroll: true });
+  }
+  $('adminOpen').addEventListener('click', openAdmin);
+  $('adminClose').addEventListener('click', closeAdmin);
+  adminPanel.addEventListener('click', (e) => { if (e.target === adminPanel) closeAdmin(); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && adminPanel.classList.contains('open')) closeAdmin();
+  });
+
+  function fillEditor() {
+    $('discordUrl').value = currentContent.discordUrl || '';
+    $('serverIp').value = currentContent.serverIp || '';
+    $('newsInput').value = (currentContent.news || [])
+      .map((n) => [n.title, n.text, n.date].join(' | ')).join('\n');
+  }
+
+  loginForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    hideAdminStatus();
+    try {
+      await api('/api/admin/login', { method: 'POST', body: JSON.stringify({ password: passwordInput.value }) });
+      passwordInput.value = '';
+      loginForm.hidden = true;
+      editor.hidden = false;
+      fillEditor();
+      showAdminStatus('Вход выполнен.', 'ok');
+    } catch (err) {
+      showAdminStatus(err.message, 'err');
+    }
+  });
+
+  $('saveContent').addEventListener('click', async () => {
+    hideAdminStatus();
+    const lines = (id) => $(id).value.split('\n').map((x) => x.trim()).filter(Boolean);
+    const news = lines('newsInput').map((line) => {
+      const [title, text = '', date = ''] = line.split('|').map((x) => x.trim());
+      return { title, text, date };
+    });
+    try {
+      currentContent = await api('/api/admin/content', {
+        method: 'POST',
+        body: JSON.stringify({
+          discordUrl: $('discordUrl').value.trim(),
+          serverIp: $('serverIp').value.trim(),
+          news,
+        }),
+      });
+      renderContent(currentContent);
+      showAdminStatus('Изменения сохранены!', 'ok');
+    } catch (err) {
+      showAdminStatus(err.message, 'err');
+    }
+  });
+
+  $('logoutAdmin').addEventListener('click', async () => {
+    try { await api('/api/admin/logout', { method: 'POST', body: '{}' }); } catch { /* сессия и так закроется */ }
+    editor.hidden = true;
+    loginForm.hidden = false;
+    passwordInput.value = '';
+    showAdminStatus('Вы вышли из панели.', 'ok');
+  });
+})();
+
+</script>
+</body>
+</html>
